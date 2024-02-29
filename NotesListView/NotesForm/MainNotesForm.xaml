@@ -6,7 +6,97 @@
         xmlns:local="clr-namespace:NotesListView.NotesForm"
         mc:Ignorable="d"
         Title="Заметки" Height="450" Width="800">
+    <Window.Resources>
+        <Style TargetType="Button">
+            <Setter Property="FontSize"  Value="17"/>
+            <Setter Property="FontFamily"  Value="Century Gothic"/>
+            <Setter Property="Background"  Value="#FF868686"/>
+            <Setter Property="Foreground"  Value="White"/>
+            <Style.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="10"/>
+                </Style>
+            </Style.Resources>
+        </Style>
+        <Style TargetType="TextBlock">
+            <Setter Property="FontSize"  Value="17"/>
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="FontFamily"  Value="Century Gothic"/>
+        </Style>
+        <Style TargetType="TextBox">
+            <Setter Property="FontSize"  Value="17"/>
+            <Setter Property="FontFamily"  Value="Century Gothic"/>
+        </Style>
+        <Style TargetType="DatePicker">
+            <Setter Property="FontSize"  Value="17"/>
+            <Setter Property="FontFamily"  Value="Century Gothic"/>
+        </Style>
+        <Style TargetType="PasswordBox">
+            <Setter Property="FontSize"  Value="17"/>
+            <Setter Property="FontFamily"  Value="Century Gothic"/>
+        </Style>
+        <Style TargetType="ComboBox">
+            <Setter Property="FontSize"  Value="17"/>
+            <Setter Property="FontFamily"  Value="Century Gothic"/>
+        </Style>
+        <Style TargetType="TextBlock" x:Key="LwTbl">
+            <Setter Property="FontSize"  Value="17"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontWeight" Value="Bold" />
+            <Setter Property="FontFamily"  Value="Century Gothic"/>
+        </Style>
+    </Window.Resources>
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.3*"/>
+            <RowDefinition/>
+            <RowDefinition Height="0.2*"/>
+
+        </Grid.RowDefinitions>
+
+
+
+        <Grid Margin="0,10,0,10" Grid.RowSpan="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="60"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <ListView Name="LViewNotes" ScrollViewer.HorizontalScrollBarVisibility="Disabled" BorderBrush="White" Margin="-1,30,-1,-68" Grid.RowSpan="2" Background="#FF292828">
+                <ListView.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel Orientation="Horizontal" HorizontalAlignment="Center"></WrapPanel>
+                    </ItemsPanelTemplate>
+                </ListView.ItemsPanel>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <Border CornerRadius="5" Padding="5" Width="250" Background="#FF232323" Height="auto">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*"></RowDefinition>
+                                    <RowDefinition Height="*"></RowDefinition>
+                                </Grid.RowDefinitions>
+                                <Border Grid.Row="0" Margin="5">
+                                    <StackPanel>
+                                        <TextBlock Width="auto" Text="{Binding Name}" Style="{StaticResource LwTbl}" FontWeight="Regular" FontFamily="Segoe UI Light" TextWrapping="Wrap" Margin="10,0,5,5" FontSize="24" HorizontalAlignment="Left"></TextBlock>
+                                    </StackPanel>
+                                </Border>
+                                <Border Grid.Row="1" BorderThickness="1" BorderBrush="White" Margin="5">
+                                    <ListViewItem MouseDoubleClick="ListViewItem_MouseDoubleClick" >
+                                        <StackPanel VerticalAlignment="Center">
+                                            <TextBlock Width="auto" Text="{Binding Content}" Style="{StaticResource LwTbl}" FontWeight="Regular" FontFamily="Segoe UI Light" TextWrapping="Wrap" Margin="10,0,5,5" FontSize="24" HorizontalAlignment="Center"></TextBlock>
+                                        </StackPanel>
+                                    </ListViewItem>
+                                </Border>
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </Grid>
+        <Rectangle Stroke="Black" Fill="#FF4A4848" Height="43" VerticalAlignment="Top"/>
+        <Button Name="insertButton" Content="Добавить" HorizontalAlignment="Left" Margin="10,4,0,0" VerticalAlignment="Top" Height="35" Width="103" Click="insertButton_Click"/>
+        <Button Name="deleteButton" Content="Удалить" HorizontalAlignment="Left" Margin="118,4,0,0" VerticalAlignment="Top" Height="35" Width="103" Click="deleteButton_Click"/>
     </Grid>
 </Window>
+
