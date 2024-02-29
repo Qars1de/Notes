@@ -35,7 +35,23 @@ namespace NotesListView.NotesForm
 
         private void insertButton_Click(object sender, RoutedEventArgs e)
         {
-            
+            InsertForm.InsertFormNotes insert = new InsertForm.InsertFormNotes();
+            if (insert.ShowDialog() == true)
+            {
+                
+                DB db = new DB();
+
+                SqlCommand command = new SqlCommand("insert into Notes (Name, Content) values (@name, @cont)", db.getConnection());
+                command.Parameters.Add("@name", SqlDbType.VarChar).Value = insert.NameBox.Text;
+                command.Parameters.Add("@cont", SqlDbType.VarChar).Value = insert.contentBox.Text;
+
+                db.openConnection();
+                SqlDataAdapter adapter = new SqlDataAdapter(command);
+                command.ExecuteNonQuery();
+                Update();
+                db.closeConnection();
+
+            }
         }
 
         private void deleteButton_Click(object sender, RoutedEventArgs e)
@@ -54,6 +70,11 @@ namespace NotesListView.NotesForm
                     MessageBox.Show(ex.Message.ToString());
                 }
             }
+        }
+
+        private void ListViewItem_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+
         }
     }
 }
