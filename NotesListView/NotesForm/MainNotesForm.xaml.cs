@@ -35,7 +35,7 @@ namespace NotesListView.NotesForm
 
         private void insertButton_Click(object sender, RoutedEventArgs e)
         {
-            InsertForm.InsertFormNotes insert = new InsertForm.InsertFormNotes();
+            InsertForm.InsertFormNotes insert = new InsertForm.InsertFormNotes(null);
             if (insert.ShowDialog() == true)
             {
                 
@@ -74,7 +74,11 @@ namespace NotesListView.NotesForm
 
         private void ListViewItem_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-
+            InsertForm.InsertFormNotes insert = new InsertForm.InsertFormNotes((sender as ListViewItem).DataContext as Notes);
+            if (insert.ShowDialog() == true)
+            {
+                Update();
+            }
         }
     }
 }

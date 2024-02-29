@@ -17,11 +17,20 @@ namespace NotesListView.InsertForm
     /// <summary>
     /// Логика взаимодействия для InsertFormNotes.xaml
     /// </summary>
+    /// 
     public partial class InsertFormNotes : Window
     {
-        public InsertFormNotes()
+
+        private Notes _currentNotes;
+
+        public InsertFormNotes(Notes selectedNotes)
         {
             InitializeComponent();
+            if (selectedNotes != null)
+            {
+                _currentNotes = selectedNotes;
+            }
+            DataContext = _currentNotes;
         }
 
         private void okButton_Click(object sender, RoutedEventArgs e)
